@@ -243,8 +243,10 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_help) {
             return true;
+        } else if(id == R.id.action_info){
+            
         }
 
         return super.onOptionsItemSelected(item);
