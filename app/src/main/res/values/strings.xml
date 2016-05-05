@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Australia GPA Calculator</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="university">
+        <item>Australian National University</item>
+        <item>Monash University</item>
+    </string-array>
+
+</resources>
