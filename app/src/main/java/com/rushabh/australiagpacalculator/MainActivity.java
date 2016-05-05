@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,22 +15,31 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    AppCompatSpinner universitySpinner, spinnerGrade;
-    EditText unit;
+    AppCompatSpinner universitySpinner;
     LinearLayout main;
     HashMap<String, Float> grade = new HashMap<String, Float>();
     ArrayAdapter<CharSequence> universityAdapter;
     FloatingActionButton fab;
     int position = 0;
+    int count = 1;
     ArrayAdapter<String> gradeAdapter;
     ArrayList<String> gradList;
+    ArrayList<Integer> ids;
+    HashMap<Integer, Integer> gradeUnitPair;
+
+    TextView creditPoint, gpaUnitScore, gpa;
+
+    String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +47,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        ids = new ArrayList<Integer>();
         main = (LinearLayout) findViewById(R.id.linear_layout_gpa);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        creditPoint = (TextView)findViewById(R.id.credit_point);
+        gpaUnitScore = (TextView)findViewById(R.id.gpa_unit_score);
+        gpa = (TextView) findViewById(R.id.gpa);
 
         universitySpinner = (AppCompatSpinner) findViewById(R.id.university_spinner);
         universityAdapter = ArrayAdapter.createFromResource(getApplicationContext(),R.array.university,  android.R.layout.simple_spinner_item);
@@ -51,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
         gradList = new ArrayList<String>();
         gradeAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, gradList);
 
+        gradeUnitPair = new HashMap<Integer, Integer>();
         putGrade(0);
-        addCourse(0);
+        addCourse();
+
 
         universitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -70,34 +89,96 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addCourse(position);
+                addCourse();
             }
         });
 
     }
 
-    private void addCourse(int id) {
+    private void addCourse() {
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.5f);
 
-        spinnerGrade = new AppCompatSpinner(this);
-        spinnerGrade.setId(id);
-        spinnerGrade.setLayoutParams(params);
 
+        AppCompatSpinner spinnerGrade = new AppCompatSpinner(this);
+
+        spinnerGrade.setId(count*1);
+        spinnerGrade.setLayoutParams(params);
         spinnerGrade.setAdapter(gradeAdapter);
 
         ll.addView(spinnerGrade);
 
-        unit = new EditText(this);
-        unit.setId(id);
+        spinnerGrade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG , calcGPA()+"");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        EditText unit = new EditText(this);
+        unit.setId(count*100);
+        gradeUnitPair.put(spinnerGrade.getId(), unit.getId());
         unit.setHint("Course Unit");
         unit.setRawInputType(InputType.TYPE_CLASS_NUMBER);
         unit.setLayoutParams(params);
         ll.addView(unit);
+        count++;
 
         main.addView(ll);
 
+    }
+
+    private float calcGPA() {
+        float gpa = 0;
+        String grade;
+        float gradeValue = 0f;
+        int unit = 0;
+        int singleUnit = 0;
+        float weightedGPAUnit = 0;
+
+
+        for (Map.Entry<Integer, Integer> entry : gradeUnitPair.entrySet()) {
+            Spinner spinnerGrade = getspinner(entry.getKey());
+            EditText textUnit = getUnit(entry.getValue());
+            try {
+                singleUnit = (!textUnit.getText().toString().trim().isEmpty() ? Integer.parseInt(textUnit.getText().toString()) : 0);
+                unit = unit + singleUnit;
+                Log.d(TAG + " textunit", unit+"");
+                if (!spinnerGrade.getSelectedItem().toString().equals("")) {
+                    grade = spinnerGrade.getSelectedItem().toString() != "" ? spinnerGrade.getSelectedItem().toString() : "";
+                    if(this.grade.containsKey(grade)) {
+                        gradeValue = this.grade.get(grade);
+                    }
+                    weightedGPAUnit = weightedGPAUnit + (gradeValue * singleUnit);
+                    gpa = weightedGPAUnit/unit;
+                }
+            } catch(NumberFormatException ex){
+                ex.printStackTrace();
+            }
+        }
+        setAnswer(unit, weightedGPAUnit, gpa);
+        return gpa;
+    }
+
+    private void setAnswer(int creditPoint, float gpaUnitScore, float gpa){
+        this.creditPoint.setText("Credit Pont:" + creditPoint);
+        this.gpaUnitScore.setText("GPA Unit Score:" + gpaUnitScore);
+        this.gpa.setText("GPA:" + gpa);
+
+
+    }
+
+    private Spinner getspinner(int id){
+        return (Spinner) findViewById(id);
+    }
+    private EditText getUnit(int id){
+        return (EditText) findViewById(id);
     }
 
     public void putGrade(int position){
