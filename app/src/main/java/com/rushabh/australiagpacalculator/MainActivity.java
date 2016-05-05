@@ -98,8 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
         main.addView(ll);
 
-
-
     }
 
     public void putGrade(int position){

@@ -19,11 +19,51 @@
         android:id="@+id/linear_layout_gpa"
         android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatSpinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/university_spinner">
-    </android.support.v7.widget.AppCompatSpinner>
+        <android.support.v7.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/university_spinner">
+        </android.support.v7.widget.AppCompatSpinner>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/credit_point"
+                    android:gravity="center"
+                    android:text="Credit Point:"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:id="@+id/gpa_unit_score"
+                    android:text="GPA Unit Score:"
+                    android:layout_weight="0.5" />
+                </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/gpa"
+                android:gravity="center"
+                android:layout_marginBottom="20px"
+                android:text="GPA:" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </ScrollView>
