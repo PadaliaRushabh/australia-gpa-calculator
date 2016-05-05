@@ -6,7 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -128,6 +130,23 @@ public class MainActivity extends AppCompatActivity {
         unit.setRawInputType(InputType.TYPE_CLASS_NUMBER);
         unit.setLayoutParams(params);
         ll.addView(unit);
+
+        unit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d(TAG , calcGPA()+"");
+            }
+        });
         count++;
 
         main.addView(ll);
@@ -149,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 singleUnit = (!textUnit.getText().toString().trim().isEmpty() ? Integer.parseInt(textUnit.getText().toString()) : 0);
                 unit = unit + singleUnit;
-                Log.d(TAG + " textunit", unit+"");
                 if (!spinnerGrade.getSelectedItem().toString().equals("")) {
                     grade = spinnerGrade.getSelectedItem().toString() != "" ? spinnerGrade.getSelectedItem().toString() : "";
                     if(this.grade.containsKey(grade)) {
@@ -157,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     weightedGPAUnit = weightedGPAUnit + (gradeValue * singleUnit);
                     gpa = weightedGPAUnit/unit;
+                    if(Float.isNaN(gpa)) gpa = 0.0f;
                 }
             } catch(NumberFormatException ex){
                 ex.printStackTrace();
@@ -170,8 +189,6 @@ public class MainActivity extends AppCompatActivity {
         this.creditPoint.setText("Credit Pont:" + creditPoint);
         this.gpaUnitScore.setText("GPA Unit Score:" + gpaUnitScore);
         this.gpa.setText("GPA:" + gpa);
-
-
     }
 
     private Spinner getspinner(int id){
