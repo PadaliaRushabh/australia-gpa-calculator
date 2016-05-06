@@ -42,7 +42,9 @@
                     android:layout_height="match_parent"
                     android:id="@+id/credit_point"
                     android:gravity="center"
-                    android:text="Credit Point:"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sixteen_dp"
+                    android:text="Credit Point: "
                     android:layout_weight="0.5" />
 
                 <TextView
@@ -50,7 +52,9 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:id="@+id/gpa_unit_score"
-                    android:text="GPA Unit Score:"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sixteen_dp"
+                    android:text="GPA Unit Score: "
                     android:layout_weight="0.5" />
                 </LinearLayout>
 
@@ -59,8 +63,10 @@
                 android:layout_height="match_parent"
                 android:id="@+id/gpa"
                 android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="@dimen/sixteen_dp"
                 android:layout_marginBottom="20px"
-                android:text="GPA:" />
+                android:text="GPA: " />
 
         </LinearLayout>
 

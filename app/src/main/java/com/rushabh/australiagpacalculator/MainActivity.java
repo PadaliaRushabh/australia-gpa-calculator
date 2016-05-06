@@ -1,8 +1,8 @@
 package com.rushabh.australiagpacalculator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
@@ -23,7 +23,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -187,9 +186,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAnswer(int creditPoint, float gpaUnitScore, float gpa){
-        this.creditPoint.setText("Credit Pont:" + creditPoint);
-        this.gpaUnitScore.setText("GPA Unit Score:" + gpaUnitScore);
-        this.gpa.setText("GPA:" + gpa);
+        this.creditPoint.setText("Credit Point: " + creditPoint);
+        this.gpaUnitScore.setText("GPA Unit Score: " + gpaUnitScore);
+        this.gpa.setText("GPA: " + String.format("%.3f", gpa));
     }
 
     private Spinner getspinner(int id){
@@ -244,10 +243,12 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_help) {
-            return true;
-        } else if(id == R.id.action_info){
-
+        if (id == R.id.action_info) {
+            Intent intent = new Intent(getApplicationContext(), InfoActivity.class);
+            startActivity(intent);
+        } else if(id == R.id.action_about){
+            Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

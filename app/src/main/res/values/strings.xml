@@ -1,7 +1,23 @@
 <resources>
     <string name="app_name">Australia GPA Calculator</string>
-    <string name="action_settings">Settings</string>
-
+    <string name="activity_info">Australia GPA Calculator Info</string>
+    <string name="activity_about">Australia GPA Calculator About</string>
+    <string name="action_info">Info</string>
+    <string name="action_about">About</string>
+    <string name="disclaimer"> The score is an indication only and does not provide an official GPA </string>
+    <string name="gpa_question">What is GPA? </string>
+    <string name="gpa_ans"> A GPA is an internationally recognised method of assigning a numerical index on a scale; it provides a summary of academic performance. </string>
+    <string name="formula_label"> Formula</string>
+    <string name="formula">GPA = ∑ (grade point value x units) / ∑ units  </string>
+    <string name="methodology_label">Methodology </string>
+    <string name="methodology"> 1.multiply the units load value by the grade point value to determine the weighted grade point score for a course\n2.sum the weighted grade point score for each course within an academic career\n3.sum the total units undertaken within an academic career\n4.divide the total of the weighted grade point score by the total of the units within an academic career\n5.calculate to three decimal points</string>
+    <string name="support_label">Support</string>
+    <string name="support_future">More University will be added on request or send me a pull request on <a href="https://github.com/PadaliaRushabh/australia-gpa-calculator">GitHub repo</a>.\nCurrently Application supports:</string>
+    <string name="support">1.<a href="http://www.anu.edu.au/students/program-administration/assessments-exams/grade-point-average-gpa">Australian National University</a>\n2.<a href="http://www.monash.edu/exams/official-record-results/gpa">Monash University</a></string>
+    <string name="about_app_description">Australia GPA Calculator is a simple, materialist designed opensource application to calculate GPA. GPA is an internationally recognised method of assigning a numerical index on a scale; it provides a summary of academic performance.  </string>
+    <string name="about_app_developers">Australia GPA Calculator is made by <a href="https://au.linkedin.com/in/padaliarushabh">Rushabh Padalia</a>
+    </string>
+    <string name="copyright">Copyright 2016 Rushabh Padalia</string>
     <string-array name="university">
         <item>Australian National University</item>
         <item>Monash University</item>
