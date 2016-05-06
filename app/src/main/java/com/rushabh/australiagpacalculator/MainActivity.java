@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         gpa = (TextView) findViewById(R.id.gpa);
 
         universitySpinner = (AppCompatSpinner) findViewById(R.id.university_spinner);
-        universityAdapter = ArrayAdapter.createFromResource(getApplicationContext(),R.array.university,  android.R.layout.simple_spinner_item);
-        universityAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        universityAdapter = ArrayAdapter.createFromResource(getApplicationContext(),R.array.university,  R.layout.spinner_item);
+        universityAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         universitySpinner.setAdapter(universityAdapter);
         universitySpinner.setSelection(0);
 
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 putGrade(position);
                 setPosition(position);
+                calcGPA();
             }
 
             @Override
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerGrade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG , calcGPA()+"");
+                calcGPA();
             }
 
             @Override
@@ -246,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_help) {
             return true;
         } else if(id == R.id.action_info){
-            
+
         }
 
         return super.onOptionsItemSelected(item);
