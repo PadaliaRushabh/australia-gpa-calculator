@@ -5,8 +5,6 @@ GPA is an internationally recognised method of assigning a numerical index on a 
 
 More University will be added on request or send me a pull request on GitHub repo.
 
-Australia GPA Calculator is released as an opensource software under MIT License. See the GitHub link below
-Australia GPA Calculator repo: https://github.com/PadaliaRushabh/australia-gpa-calculator
 
 Formula used in the Application
 GPA = ∑ (grade point value x units) / ∑ units
@@ -17,3 +15,5 @@ Methodology
 3.sum the total units undertaken within an academic career.
 4.divide the total of the weighted grade point score by the total of the units within an academic career.
 5.calculate to three decimal points.
+
+Google Play Link: https://play.google.com/store/apps/details?id=com.rushabh.australiagpacalculator
